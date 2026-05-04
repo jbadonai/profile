@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajeyemi Alajede — Senior BSS Engineer & Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07090f;
+  --surface: #0e1320;
+  --surface2: #141928;
+  --border: rgba(255,255,255,0.06);
+  --accent: #4fffce;
+  --accent2: #f5a623;
+  --accent3: #7b8cff;
+  --text: #e8edf5;
+  --muted: #7a8399;
+  --dim: #3a4155;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  padding: 1.4rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(7,9,15,0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 1rem 6%; }
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--accent); text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.nav-links { list-style: none; display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10rem 6% 6rem;
+  position: relative; overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(79,255,206,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,255,206,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+.hero-glow {
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,255,206,0.07) 0%, transparent 70%);
+  top: 10%; left: -10%; z-index: 0;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+.hero-glow2 {
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,140,255,0.06) 0%, transparent 70%);
+  bottom: 5%; right: -8%; z-index: 0;
+  animation: drift2 18s ease-in-out infinite alternate;
+}
+@keyframes drift { from { transform: translate(0,0); } to { transform: translate(60px,40px); } }
+@keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-50px,-30px); } }
+
+.hero-content { position: relative; z-index: 1; max-width: 850px; }
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700; line-height: 1.02; letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+.hero-name span { color: var(--accent); font-style: italic; font-weight: 400; }
+
+.hero-role {
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: var(--muted); font-weight: 300; margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.hero-role strong { color: var(--text); font-weight: 500; }
+
+.hero-bio {
+  font-size: 1.05rem; color: var(--muted); line-height: 1.85;
+  max-width: 640px; margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--dim); color: var(--muted); border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-cta { display: flex; gap: 1.2rem; flex-wrap: wrap; animation: fadeUp 0.8s ease 0.6s both; }
+
+.btn {
+  display: inline-block; padding: 0.9rem 2.2rem;
+  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em;
+  text-decoration: none; border: 1px solid; cursor: pointer;
+  transition: all 0.25s ease; position: relative; overflow: hidden;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0;
+  transform: translateX(-100%); transition: transform 0.3s ease;
+}
+.btn:hover::before { transform: translateX(0); }
+.btn-primary { background: transparent; border-color: var(--accent); color: var(--accent); }
+.btn-primary::before { background: var(--accent); }
+.btn-primary:hover { color: var(--bg); }
+.btn-outline { background: transparent; border-color: var(--dim); color: var(--muted); }
+.btn-outline::before { background: var(--surface2); }
+.btn-outline:hover { color: var(--text); border-color: var(--muted); }
+
+/* STATS */
+.stats-strip {
+  background: var(--surface);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  display: flex;
+}
+.stat-block {
+  flex: 1; padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border); transition: background 0.3s;
+}
+.stat-block:last-child { border-right: none; }
+.stat-block:hover { background: var(--surface2); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 700; color: var(--accent);
+  line-height: 1; display: block; margin-bottom: 0.4rem;
+}
+.stat-desc { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* SECTIONS */
+.section { padding: 7rem 6%; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-head { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 4rem; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.12em; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; }
+.section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--dim), transparent); max-width: 260px; }
+
+/* ABOUT */
+.about-bg { background: var(--surface); }
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start; }
+.about-text p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.4rem; }
+.about-text p strong { color: var(--text); font-weight: 500; }
+.sidebar-card { background: var(--surface2); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1.5rem; }
+.sidebar-card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+.contact-row { display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.7rem; }
+.contact-row:last-child { margin-bottom: 0; }
+.contact-row .icon { font-size: 1rem; color: var(--accent); width: 20px; }
+.contact-row a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+.contact-row a:hover { color: var(--accent); }
+
+/* SKILLS */
+.skills-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--dim); }
+.skill-cat { background: var(--bg); padding: 2.5rem 2rem; transition: background 0.3s; }
+.skill-cat:hover { background: var(--surface); }
+.skill-cat-icon { font-size: 2rem; margin-bottom: 1rem; }
+.skill-cat-name { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+.skill-list { list-style: none; }
+.skill-list li { font-size: 0.9rem; color: var(--muted); padding: 0.45rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; transition: color 0.2s; }
+.skill-list li:last-child { border-bottom: none; }
+.skill-list li:hover { color: var(--text); }
+.skill-list li::before { content: '▸'; color: var(--dim); font-size: 0.7rem; }
+
+/* PROJECTS */
+.projects-bg { background: var(--surface); }
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--dim); }
+.project-card { background: var(--bg); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; display: flex; flex-direction: column; }
+.project-card:hover { background: var(--surface); }
+.project-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+.project-card:hover::after { transform: scaleX(1); }
+.project-card.alt::after { background: var(--accent2); }
+.project-card.alt2::after { background: var(--accent3); }
+.project-card.wide { grid-column: span 2; }
+.project-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+.project-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.8rem; line-height: 1.2; }
+.project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; flex: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; padding: 0.25rem 0.65rem; background: var(--surface2); color: var(--muted); border: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+.project-card:hover .tag { border-color: var(--dim); color: var(--text); }
+
+/* EXPERIENCE */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; width: 1px; bottom: 0; background: var(--dim); }
+.exp-item { position: relative; padding: 0 0 3.5rem 2.5rem; }
+.exp-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
+.exp-role { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+.exp-period { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; padding-top: 4px; }
+.exp-company { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.2rem; }
+.exp-company strong { color: var(--accent3); font-weight: 500; }
+.exp-bullets { list-style: none; }
+.exp-bullets li { font-size: 0.9rem; color: var(--muted); line-height: 1.75; padding: 0.3rem 0 0.3rem 1.2rem; position: relative; }
+.exp-bullets li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+
+/* EDUCATION */
+.edu-bg { background: var(--surface); }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--dim); }
+.edu-card { background: var(--bg); padding: 2.5rem; transition: background 0.3s; }
+.edu-card:hover { background: var(--surface2); }
+.edu-icon { font-size: 2rem; margin-bottom: 1rem; }
+.edu-degree { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.edu-school { font-size: 0.9rem; color: var(--accent); margin-bottom: 0.2rem; }
+.edu-period { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+.certs-list { margin-top: 3rem; }
+.cert-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+.cert-item:first-child { border-top: 1px solid var(--border); }
+.cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); margin-top: 6px; flex-shrink: 0; }
+.cert-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+.cert-issuer { font-size: 0.82rem; color: var(--muted); }
+
+/* CONTACT */
+.contact-section { text-align: center; padding: 9rem 6%; }
+.contact-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.8rem; }
+.contact-tag::before, .contact-tag::after { content: ''; display: block; width: 40px; height: 1px; background: var(--dim); }
+.contact-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.contact-headline em { font-style: italic; color: var(--accent); font-weight: 400; }
+.contact-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.8; max-width: 520px; margin: 0 auto 3rem; }
+.contact-btn-row { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.contact-details { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; color: var(--muted); }
+.contact-details a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.contact-details a:hover { color: var(--accent); }
+
+/* FOOTER */
+footer { background: var(--surface); border-top: 1px solid var(--border); padding: 2rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.95rem; }
+.footer-note { font-size: 0.78rem; color: var(--dim); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .skills-columns { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .project-card.wide { grid-column: span 2; }
+  .stats-strip { flex-wrap: wrap; }
+  .stat-block { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+  .edu-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  nav { padding: 1rem 4%; }
+  .hero { padding: 8rem 4% 4rem; }
+  .section { padding: 5rem 4%; }
+  .nav-links { display: none; }
+  .skills-columns { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.wide { grid-column: span 1; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">&lt;Alajede.AJ /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <p class="hero-label">Senior BSS Engineer &amp; Software Developer</p>
+    <h1 class="hero-name">Ajeyemi <span>Alajede</span></h1>
+    <p class="hero-role">
+      <strong>15+ years in Telecoms</strong> &nbsp;·&nbsp; Python Developer &nbsp;·&nbsp; WordPress Engineer &nbsp;·&nbsp; Algo Trader
+    </p>
+    <p class="hero-bio">
+      I build things that work — from deploying LTE networks across Nigeria to crafting trading algorithms in Pine Script &amp; MQL5, building WordPress plugins and themes from scratch, and automating workflows with Python. Engineering discipline meets software craftsmanship.
+    </p>
+    <div class="hero-pills">
+      <span class="pill">Python</span>
+      <span class="pill">WordPress / PHP</span>
+      <span class="pill">Pine Script</span>
+      <span class="pill">MQL5 / Expert Advisors</span>
+      <span class="pill">REST APIs</span>
+      <span class="pill">VBA / Automation</span>
+      <span class="pill">Desktop Apps</span>
+      <span class="pill">BSS / LTE Deployment</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:jayadonai@yahoo.com" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-block"><span class="stat-num">15+</span><span class="stat-desc">Years Telecom Experience</span></div>
+  <div class="stat-block"><span class="stat-num">8+</span><span class="stat-desc">Software Projects Delivered</span></div>
+  <div class="stat-block"><span class="stat-num">3</span><span class="stat-desc">WordPress Plugins &amp; Themes</span></div>
+  <div class="stat-block"><span class="stat-num">10+</span><span class="stat-desc">Forex Strategies Coded</span></div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about-bg" id="about">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I'm <strong>Alajede Joseph Ajeyemi</strong>, a Senior BSS Engineer at <strong>9Mobile (Etisalat Nigeria)</strong> in Port Harcourt, and a self-driven software developer with a passion for building tools that eliminate repetitive manual work. My professional journey started in civil and structural engineering, pivoted into telecommunications infrastructure, and has steadily expanded into full-stack software development.
+        </p>
+        <p>
+          Over the past 15+ years at 9Mobile, I've led end-to-end BSS site deployments, coordinated Huawei and Nokia vendors, delivered in-house LTE rollouts, and acted as Delegation of Authority for the Regional Rollout Manager. That engineering discipline — rigorous, detail-obsessed, deadline-driven — flows directly into how I write code.
+        </p>
+        <p>
+          On the development side, I've built <strong>desktop applications, web apps, REST APIs, WordPress plugins and themes, Python automation tools, and algorithmic trading systems</strong> coded in both Pine Script (TradingView) and MQL5 (MetaTrader 5). I thrive in the space between domain knowledge and software — the kind of problem that needs someone who's stood on a telecom site and watched a trade execute in real time.
+        </p>
+        <p>
+          My goal is to keep building practical, production-ready software that solves real problems — for businesses, traders, and individuals who need tools that actually work.
+        </p>
+      </div>
+      <div class="fade-in">
+        <div class="sidebar-card">
+          <div class="sidebar-card-label">Contact</div>
+          <div class="contact-row"><span class="icon">✉</span><a href="mailto:jayadonai@yahoo.com">jayadonai@yahoo.com</a></div>
+          <div class="contact-row"><span class="icon">📞</span><span>08099444076</span></div>
+          <div class="contact-row"><span class="icon">📍</span><span>Port Harcourt, Rivers State, Nigeria</span></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-label">Current Role</div>
+          <div class="contact-row" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
+            <span style="color:var(--text);font-weight:500;">Senior BSS Engineer</span>
+            <span style="font-size:0.85rem;">9Mobile · Aug 2009 – Present</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-label">Education</div>
+          <div class="contact-row" style="flex-direction:column;align-items:flex-start;gap:0.2rem;">
+            <span style="color:var(--text);font-weight:500;font-size:0.9rem;">B.Tech (Hons) Civil Engineering</span>
+            <span style="font-size:0.82rem;">Ladoke Akintola University of Technology</span>
+            <span style="font-size:0.78rem;color:var(--accent);">1995 – 2001</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-columns fade-in">
+      <div class="skill-cat">
+        <div class="skill-cat-icon">⚙️</div>
+        <div class="skill-cat-name">Programming &amp; Dev</div>
+        <ul class="skill-list">
+          <li>Python (Intermediate)</li>
+          <li>PHP / WordPress Development</li>
+          <li>VBA / Excel Macros</li>
+          <li>Pine Script v5 (TradingView)</li>
+          <li>MQL5 (MetaTrader 5)</li>
+          <li>REST API Development</li>
+          <li>Desktop App Development</li>
+          <li>Web App Development</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">📡</div>
+        <div class="skill-cat-name">Telecommunications</div>
+        <ul class="skill-list">
+          <li>BSS Implementation</li>
+          <li>LTE Deployment</li>
+          <li>Antenna &amp; Feeder Testing (VSWR/DTF)</li>
+          <li>Ericsson RBS Installation</li>
+          <li>Ericsson Mini-Link TN</li>
+          <li>Huawei &amp; Nokia Coordination</li>
+          <li>Fibre ATP</li>
+          <li>Technical Site Survey (TSS)</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">🧰</div>
+        <div class="skill-cat-name">Tools &amp; Software</div>
+        <ul class="skill-list">
+          <li>AutoCAD</li>
+          <li>Microsoft Project</li>
+          <li>STAAD Pro / Prokon</li>
+          <li>Microsoft Visio</li>
+          <li>NetStat / NETSTAT DB</li>
+          <li>Visual Basic</li>
+          <li>Git</li>
+          <li>WordPress (Plugins &amp; Themes)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section projects-bg" id="projects">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <span class="project-icon">📱</span>
+        <h3 class="project-name">Mobile Sales Tracker</h3>
+        <p class="project-desc">
+          A mobile-first application built for field sales teams to log transactions, track targets, and generate daily and weekly reports — designed to work reliably in low-connectivity environments. Features local data storage, sync logic, and exportable report summaries for management review.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Mobile</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+
+      <div class="project-card alt">
+        <span class="project-icon">⬇️</span>
+        <h3 class="project-name">JBA Video Downloader</h3>
+        <p class="project-desc">
+          A desktop video download utility supporting multiple platforms, allowing users to fetch and save content in various quality formats. Features a clean GUI, format selection, batch download queuing, and handles authentication flows — built for speed and reliability over aesthetics.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Desktop App</span>
+          <span class="tag">Tkinter GUI</span>
+          <span class="tag">yt-dlp</span>
+        </div>
+      </div>
+
+      <div class="project-card alt2">
+        <span class="project-icon">🌐</span>
+        <h3 class="project-name">Petros Global Website</h3>
+        <p class="project-desc">
+          Full WordPress website for Petros Global, featuring custom-developed widgets built specifically for the brand's requirements. Includes bespoke shortcodes, dynamic content blocks, and tailored theme modifications — delivered without page-builder bloat and without compromising on performance.
+        </p>
+        <div class="project-tags">
+          <span class="tag">WordPress</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Custom Widgets</span>
+          <span class="tag">CSS / JS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-icon">📄</span>
+        <h3 class="project-name">Python PDF Toolkit</h3>
+        <p class="project-desc">
+          A comprehensive desktop toolkit for PDF manipulation: merge, split, extract text, add watermarks, compress files, and batch-convert documents. Built as a practical replacement for expensive commercial PDF software, with a simple interface accessible to non-technical users.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">PyPDF2</span>
+          <span class="tag">ReportLab</span>
+          <span class="tag">Desktop App</span>
+        </div>
+      </div>
+
+      <div class="project-card alt">
+        <span class="project-icon">🎠</span>
+        <h3 class="project-name">Fabric Carousel — WP Plugin</h3>
+        <p class="project-desc">
+          A WordPress plugin that renders a touch-friendly, responsive image carousel purpose-built for fabric and textile product displays. Written from scratch with no third-party dependencies — features lazy loading, customisable transitions, and a full Gutenberg block editor integration for non-technical shop owners.
+        </p>
+        <div class="project-tags">
+          <span class="tag">WordPress Plugin</span>
+          <span class="tag">PHP</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Gutenberg Block</span>
+        </div>
+      </div>
+
+      <div class="project-card alt2">
+        <span class="project-icon">🧵</span>
+        <h3 class="project-name">Sewing &amp; Fashion Accessories Theme</h3>
+        <p class="project-desc">
+          A complete WordPress theme built from the ground up for sewing and fashion accessories businesses. Includes a WooCommerce-integrated layout, custom product showcase sections, a sewing-pattern download system, and a lookbook gallery — everything a fashion craft brand needs, none of the bloat.
+        </p>
+        <div class="project-tags">
+          <span class="tag">WordPress Theme</span>
+          <span class="tag">PHP</span>
+          <span class="tag">WooCommerce</span>
+          <span class="tag">Custom Post Types</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-icon">📈</span>
+        <h3 class="project-name">Forex Strategies — Pine Script</h3>
+        <p class="project-desc">
+          Multiple complete trading strategies coded in Pine Script v5 for TradingView — trend-following systems, breakout strategies, and multi-timeframe confluence indicators. Each strategy includes visual entry/exit signals, risk management overlays (stop-loss / take-profit zones), and real-time alert configurations ready for live trading use.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Pine Script v5</span>
+          <span class="tag">TradingView</span>
+          <span class="tag">Custom Indicators</span>
+          <span class="tag">Strategy Tester</span>
+        </div>
+      </div>
+
+      <div class="project-card alt wide">
+        <span class="project-icon">🤖</span>
+        <h3 class="project-name">MQL5 Expert Advisors &amp; Custom Indicators</h3>
+        <p class="project-desc">
+          Translated multiple proprietary forex trading strategies into fully automated Expert Advisors (EAs) in MQL5 for MetaTrader 5. The EAs handle trade execution, dynamic position sizing based on account equity, trailing stop management, and multi-pair simultaneous operation. Also developed custom MT5 indicators that visualise complex multi-timeframe signals not natively available in the platform. Includes backtesting-optimised parameter sets, strategy performance dashboards, and live forward-test monitoring logic — giving traders a complete edge from analysis through to execution.
+        </p>
+        <div class="project-tags">
+          <span class="tag">MQL5</span>
+          <span class="tag">MetaTrader 5</span>
+          <span class="tag">Expert Advisor (EA)</span>
+          <span class="tag">Custom Indicators</span>
+          <span class="tag">Algorithmic Trading</span>
+          <span class="tag">Risk Management Logic</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline fade-in">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Senior Engineer — BSS Implementation</h3>
+          <span class="exp-period">Aug 2009 – Present</span>
+        </div>
+        <p class="exp-company"><strong>9Mobile (Etisalat Nigeria)</strong> · Port Harcourt, Rivers State</p>
+        <ul class="exp-bullets">
+          <li>Lead end-to-end deployment of BSS sites, coordinating Huawei and Nokia vendors to strict company processes and timelines across the South-South region.</li>
+          <li>Conduct all Acceptance Test Procedures (ATP) for site foundation, tower installation, and final site build sign-off, ensuring zero-defect handover.</li>
+          <li>Delivered in-house LTE rollout project, replacing external vendor engagement and generating significant CAPEX savings for the business.</li>
+          <li>Act as Delegation of Authority for the Regional Rollout Manager, overseeing all regional site activities and representing management in stakeholder engagements.</li>
+          <li>Coordinate fibre and enterprise link solution projects from initial survey through to final acceptance and commissioning.</li>
+          <li>Supervise feeder/antenna live verification tests (VSWR, DTF) and manage Health &amp; Safety compliance across all sites.</li>
+          <li>Developed Python and VBA-based project trackers to automate progress monitoring and reporting, eliminating manual spreadsheet updates.</li>
+          <li>Liaise with RF, Transmission, Legal, and SAQ departments to resolve multi-disciplinary network issues and unblock project delivery.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Project Leader</h3>
+          <span class="exp-period">Jun 2005 – May 2009</span>
+        </div>
+        <p class="exp-company"><strong>Zain Nigeria</strong> · Lagos, Lagos State</p>
+        <ul class="exp-bullets">
+          <li>Supervised BTS, BSS, and backbone site construction ensuring on-time, on-budget delivery within company standards across Lagos and surrounding regions.</li>
+          <li>Managed vendor meetings, prepared RFPs, reviewed site drawings, and approved variation orders — full procurement lifecycle ownership.</li>
+          <li>Used Microsoft Project for full project lifecycle planning and reporting; AutoCAD for site layout production and review.</li>
+          <li>Led MTN–Zain collocation projects and conducted fibre ATPs, maintaining strong cross-operator working relationships.</li>
+          <li>Conducted Technical Site Surveys (TSS) with SAQ and contractors; resolved community and landlord disputes blocking site access.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Site Engineer</h3>
+          <span class="exp-period">Mar 2004 – Jun 2005</span>
+        </div>
+        <p class="exp-company"><strong>Mobile Engineering</strong> · Lagos, Lagos State</p>
+        <ul class="exp-bullets">
+          <li>Construction and installation of MTN, Vmobile, and Glo Base Telecommunication Stations, towers, and equipment buildings across Lagos.</li>
+          <li>Ensured structural integrity, safety compliance, and quality standards across all site builds.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Structural Engineer</h3>
+          <span class="exp-period">Feb 2003 – Mar 2004</span>
+        </div>
+        <p class="exp-company"><strong>Stroika Nigeria Ltd</strong> · Lagos, Lagos State</p>
+        <ul class="exp-bullets">
+          <li>Design, detailing, and foundation construction of structures; prepared bills of quantities and supervised compliance with structural specifications.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Lecturer — Building Technology</h3>
+          <span class="exp-period">Jan 2002 – Dec 2002</span>
+        </div>
+        <p class="exp-company"><strong>Federal Technical College, Shiroro</strong> · Niger State</p>
+        <ul class="exp-bullets">
+          <li>Delivered courses in building construction and concreting; trained staff and students in AutoCAD, MS Word, and MS Access.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3 class="exp-role">Trainee Engineer</h3>
+          <span class="exp-period">Nov 1999 – Apr 2000</span>
+        </div>
+        <p class="exp-company"><strong>Ministry of Works &amp; Transport</strong> · Ibadan, Oyo State</p>
+        <ul class="exp-bullets">
+          <li>Assisted in bridge construction supervision and conducted CBR, Atterberg Limit, aggregate impact, and concrete cube tests.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section edu-bg" id="education">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education &amp; Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid fade-in">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">B.Tech (Hons) Civil Engineering</div>
+        <div class="edu-school">Ladoke Akintola University of Technology — Ogbomoso, Oyo State</div>
+        <div class="edu-period">1995 – 2001</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">🏫</div>
+        <div class="edu-degree">SSCE</div>
+        <div class="edu-school">Anglican Commercial Grammar School — Ibadan, Oyo State</div>
+        <div class="edu-period">1989 – 1994</div>
+      </div>
+    </div>
+    <div class="certs-list fade-in">
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Diploma — Computer, AutoCAD, Desktop Publishing &amp; Microsoft Project</div>
+          <div class="cert-issuer">Fate Computers, Ibadan · Oct 2000</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Strength Assessment &amp; Design of Lattice Towers</div>
+          <div class="cert-issuer">Industry Training</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Ericsson Mini-Link TN Installation</div>
+          <div class="cert-issuer">Industry Training — Ericsson</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Ericsson RBS 2116 Installation</div>
+          <div class="cert-issuer">Industry Training — Ericsson</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Concrete Quality Control</div>
+          <div class="cert-issuer">Industry Training</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-name">Contract Problems and Adjudged Solutions</div>
+          <div class="cert-issuer">Industry Training</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-tag">Available for freelance &amp; consulting work</div>
+  <h2 class="contact-headline">Let's build something<br><em>that actually works.</em></h2>
+  <p class="contact-sub">
+    Whether you need a Python automation tool, a WordPress plugin, a trading algorithm, or a full web application — I'm available for freelance work and consulting engagements.
+  </p>
+  <div class="contact-btn-row">
+    <a href="mailto:jayadonai@yahoo.com" class="btn btn-primary">Send Me an Email</a>
+    <a href="tel:08099444076" class="btn btn-outline">Call 08099444076</a>
+  </div>
+  <div class="contact-details">
+    <span>✉ <a href="mailto:jayadonai@yahoo.com">jayadonai@yahoo.com</a></span>
+    <span>📍 Port Harcourt, Rivers State, Nigeria</span>
+    <span>📞 <a href="tel:08099444076">08099444076</a></span>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">&lt;Alajede.AJ /&gt;</span>
+  <span class="footer-note">Ajeyemi Alajede · Senior BSS Engineer &amp; Developer · <span id="yr"></span></span>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
